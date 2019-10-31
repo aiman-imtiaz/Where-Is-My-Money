@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.time.Instant;
@@ -18,6 +19,7 @@ public class AddSpending extends AppCompatActivity {
     TextView output;
     Button addSpendingBTN;
     EditText spendingAmountInput;
+    Spinner chooseSpendingCategory;
     Database DB = MainActivity.DB;
 
 
