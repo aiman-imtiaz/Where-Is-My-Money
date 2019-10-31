@@ -6,6 +6,7 @@ package com.example.whereismymoney;
  * and open the template in the editor.
  */
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 import android.graphics.Color;
 import android.os.Build;
@@ -14,20 +15,24 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.RequiresApi;
 
 import java.util.Date;
+import java.util.Map;
 
 
 public class Database {
-    private String defaultCategoryName = "uncategorized";
+    private String defaultCategoryName = "Uncategorized";
     float spendingsLimit;
     float totalSpendings;
     public List<Spending> Spendings = new ArrayList<Spending>();
     public List<Category> Categories = new ArrayList<Category>();
+    public Map categoryMap = new Hashtable<String, Category>();
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public Database(){
         Category defaultCat = new Category(defaultCategoryName, Color.valueOf(Color.GRAY));
         Categories.add(defaultCat);
+        categoryMap.put(defaultCategoryName, defaultCat);
     }
 
     private void UpdateSpendingCategory(Spending spnd, Category cat){
@@ -60,6 +65,7 @@ public class Database {
         // If the category name is already in the Categories List, give an error
         Category category = new Category(name, col);
         Categories.add(category);
+        categoryMap.put(name, category);
     }
 
     private void UpdateSpendingsLimit(float amt){

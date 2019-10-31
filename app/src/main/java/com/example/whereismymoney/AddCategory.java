@@ -29,7 +29,6 @@ public class AddCategory extends AppCompatActivity {
     Button addCategoryBTN;
     Spinner chooseCategoryColor;
     EditText addCategoryNameInput;
-    //Map colorMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +53,5 @@ public class AddCategory extends AppCompatActivity {
         //Object categoryColor = colorDictionary.get(chooseCategoryColor);
         Color categoryColor = Color.valueOf(Color.parseColor(String.valueOf(chooseCategoryColor.getSelectedItem())));
         DB.MakeCategory(categoryName, categoryColor);
-
     }
 }
