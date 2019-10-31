@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -29,6 +30,10 @@ public class AddSpending extends AppCompatActivity {
         setContentView(R.layout.activity_add_spending);
         output = (TextView) findViewById(R.id.output);
         spendingAmountInput = (EditText) findViewById(R.id.spendingAmountInput);
+        chooseSpendingCategory = (Spinner) findViewById(R.id.chooseSpendingCategory);
+        ArrayAdapter<Category> dataAdapter = new ArrayAdapter<Category>(this,
+                android.R.layout.simple_spinner_dropdown_item, DB.Categories);
+        chooseSpendingCategory.setAdapter(dataAdapter);
         addSpendingBTN = (Button) findViewById(R.id.addSpendingBTN);
         addSpendingBTN.setOnClickListener(new View.OnClickListener() {
             @Override
