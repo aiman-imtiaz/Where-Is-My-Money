@@ -3,6 +3,7 @@ package com.example.whereismymoney;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -53,5 +54,7 @@ public class AddSpending extends AppCompatActivity {
         Date newDate = Date.from(Instant.now());
         //TODO: Change category to spinner element
         DB.MakeSpending(spendingAmount, newDate, (Category) DB.categoryMap.get(String.valueOf(chooseSpendingCategory.getSelectedItem())/*DB.Categories.get(0)*/));
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

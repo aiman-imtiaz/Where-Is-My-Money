@@ -78,9 +78,45 @@ public class Database {
             if (spd.compareTo(cat) == 0){
                 returnList.add(spd);
             }
-            System.out.println(spd);
         }
         return returnList;
+    }
+
+    public float SumOfSpendingsInCategory(Category cat){
+        float retval = 0;
+        for(Spending spd : Spendings){
+            if (spd.compareTo(cat) == 0){
+                retval += spd.amount;
+            }
+        }
+        return retval;
+    }
+
+    public float[] getSpendingProportions(){
+        float[] proportions = new float[Categories.size()];
+        List<Spending> spdList;
+        float spendingAmount = 0f;
+        for (Category cat : Categories){
+            spdList = ReturnSpendingsInCategory(cat);
+            for (Spending spd : spdList){
+                spendingAmount += spd.amount;
+            }
+            spendingAmount /= totalSpendings;
+            proportions[Categories.indexOf(cat)] = spendingAmount;
+            spendingAmount = 0f;
+        }
+
+        return proportions;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public int[] getCategoryColors(){
+        int[] retArr = new int[Categories.size()];
+        for (int i = 0; i < Categories.size(); i++){
+            retArr[i] = Categories.get(i).colour.toArgb();
+        }
+
+        return retArr;
     }
 
     void deleteSpending(Spending spnd){

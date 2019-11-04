@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -11,10 +12,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+
+import java.util.ArrayList;
+import java.util.List;
+
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class MainActivity extends AppCompatActivity {
 
     public static Database DB = new Database();
+    public float[] spendingProportions;
     Button makeCategoryOrSpendingBTN;
 
     @Override
@@ -28,6 +38,29 @@ public class MainActivity extends AppCompatActivity {
                 openMakeCategoryOrSpending();
             }
         });
+        spendingProportions = DB.getSpendingProportions();
+        setupPieChart();
+    }
+
+    private void setupPieChart() {
+        //populating a list of pie entries
+        List<PieEntry> pieEntries = new ArrayList<>();
+        for (int i = 0; i < DB.Categories.size(); i++){
+            Category category = DB.Categories.get(i);
+            pieEntries.add(new PieEntry(DB.SumOfSpendingsInCategory(category), category.name));
+        }
+
+        PieDataSet dataSet = new PieDataSet(pieEntries, "Spendings in Categories");
+        dataSet.setColors(DB.getCategoryColors());
+        dataSet.setValueTextColor(Color.WHITE);
+        PieData data = new PieData(dataSet);
+
+
+        // Get the chart
+        PieChart chart = (PieChart) findViewById(R.id.pieChart);
+        chart.setData(data);
+        chart.animateY(1000);
+        chart.invalidate();
     }
 
     public void openMakeCategoryOrSpending(){

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="Colors" >
+        <item>Black</item>
         <item>Red</item>
+        <item>Green</item>
         <item>Blue</item>
         <item>Yellow</item>
+        <item>Cyan</item>
+        <item>Magenta</item>
     </string-array>
-
 </resources>

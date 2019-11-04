@@ -53,5 +53,7 @@ public class AddCategory extends AppCompatActivity {
         //Object categoryColor = colorDictionary.get(chooseCategoryColor);
         Color categoryColor = Color.valueOf(Color.parseColor(String.valueOf(chooseCategoryColor.getSelectedItem())));
         DB.MakeCategory(categoryName, categoryColor);
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }
