@@ -44,7 +44,7 @@ public class AddCategory extends AppCompatActivity {
     }
     public void addCategory(){
         String categoryName = addCategoryNameInput.getText().toString();
-        Color categoryColor = colorDictionary.get(chooseCategoryColor);
-        DB.MakeCategory(categoryName, categoryColor);
+        // Color categoryColor = colorDictionary.get(chooseCategoryColor);
+        // DB.MakeCategory(categoryName, categoryColor);
     }
 }
