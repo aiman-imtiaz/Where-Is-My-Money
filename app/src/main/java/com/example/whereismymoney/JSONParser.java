@@ -21,8 +21,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-class JSONParser extends org.json.simple.parser.JSONParser {
-
+public class JSONParser {
 
     static InputStream is = null;
     static JSONObject jObj = null;

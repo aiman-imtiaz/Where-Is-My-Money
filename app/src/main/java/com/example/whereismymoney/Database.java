@@ -30,6 +30,7 @@ public class Database {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public Database(){
+        spendingsLimit = 1;
         Category defaultCat = new Category(defaultCategoryName, Color.valueOf(Color.GRAY));
         Categories.add(defaultCat);
         categoryMap.put(defaultCategoryName, defaultCat);

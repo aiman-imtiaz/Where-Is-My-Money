@@ -20,6 +20,54 @@
         app:layout_constraintTop_toTopOf="parent" />
 -->
 
+    <TextView
+        android:id="@+id/progressToSpendingLimitTXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/spendingGoalProgress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.98" />
+
+    <ProgressBar
+        android:id="@+id/spendingGoalProgress"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="217dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="20dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pieChart"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/makeCategoryOrSpendingBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        app:backgroundTint="#009688"
+        app:elevation="5dp"
+        app:fabSize="auto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.951"
+        app:maxImageSize="35dp"
+        app:srcCompat="@android:drawable/ic_input_add"
+        app:useCompatPadding="false" />
+
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/pieChart"
         android:layout_width="match_parent"
@@ -29,13 +77,16 @@
         android:layout_marginTop="150dp"
         android:layout_marginEnd="75dp"
         android:layout_marginRight="75dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="75dp"
         app:layout_constraintBottom_toTopOf="@id/makeCategoryOrSpendingBTN"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </com.github.mikephil.charting.charts.PieChart>
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="400dp"
@@ -83,29 +134,5 @@
 
         </LinearLayout>
     </ScrollView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/makeCategoryOrSpendingBTN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="10dp"
-        android:clickable="true"
-        app:backgroundTint="#009688"
-        app:elevation="5dp"
-        app:fabSize="auto"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.951"
-        app:maxImageSize="35dp"
-        app:srcCompat="@android:drawable/ic_input_add"
-        app:useCompatPadding="false" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

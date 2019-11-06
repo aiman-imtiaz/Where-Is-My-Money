@@ -11,6 +11,7 @@ import android.provider.CalendarContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     public static Database DB = new Database();
     public float[] spendingProportions;
     FloatingActionButton makeCategoryOrSpendingBTN;
+    ProgressBar spendingGoalProgress;
+    TextView progressToSpendingLimitTXT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         spendingProportions = DB.getSpendingProportions();
+        spendingGoalProgress = (ProgressBar) findViewById(R.id.spendingGoalProgress);
+        progressToSpendingLimitTXT = (TextView) findViewById(R.id.progressToSpendingLimitTXT);
+        setupProgressBar();
         setupPieChart();
+    }
+
+
+    private void setupProgressBar() {
+        float spendingsLimit = DB.spendingsLimit;
+        float totalSpendings = DB.totalSpendings;
+        float percentSpent = totalSpendings/spendingsLimit;
+        //TODO: Round the percentages so we don't get trailing decimals
+        progressToSpendingLimitTXT.setText("Current Progress To SpendingsLimit: " + DB.totalSpendings + "/" + DB.spendingsLimit
+        + "\nWhich is " + (percentSpent*100) + "% of your limit");
+        spendingGoalProgress.setProgress((int)(percentSpent*100));
     }
 
     private void setupPieChart() {

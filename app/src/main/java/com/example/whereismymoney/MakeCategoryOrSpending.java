@@ -11,6 +11,7 @@ public class MakeCategoryOrSpending extends AppCompatActivity {
 
     Button makeSpendingBTN;
     Button makeCategoryBTN;
+    Button updateSpendingsLimitBTN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,13 @@ public class MakeCategoryOrSpending extends AppCompatActivity {
                 openAddCategory();
             }
         });
+        updateSpendingsLimitBTN = (Button) findViewById(R.id.updateSpendingsLimitBTN);
+        updateSpendingsLimitBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openUpdateSpendingsLimit();
+            }
+        });
     }
     public void openAddSpending(){
         Intent intent = new Intent(this, AddSpending.class);
@@ -39,6 +47,11 @@ public class MakeCategoryOrSpending extends AppCompatActivity {
 
     public void openAddCategory(){
         Intent intent = new Intent(this, AddCategory.class);
+        startActivity(intent);
+    }
+
+    public void openUpdateSpendingsLimit(){
+        Intent intent = new Intent(this, UpdateSpendingsLimit.class);
         startActivity(intent);
     }
 }
