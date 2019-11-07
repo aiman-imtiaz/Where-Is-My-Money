@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 openMakeCategoryOrSpending();
             }
         });
-        spendingProportions = DB.getSpendingProportions();
+//        spendingProportions = DB.getSpendingProportions();
         setupPieChart();
     }
 

@@ -1,50 +1,28 @@
 package com.example.whereismymoney;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-
-
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
+import com.example.whereismymoney.JSONParser;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
-import org.apache.http.NameValuePair;
-import org.w3c.dom.Text;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class AddCategory extends AppCompatActivity {
@@ -59,7 +37,7 @@ public class AddCategory extends AppCompatActivity {
 
 
     //TODO: Make a new url for this, currently a placeholder
-    private static String url_create_category = "http://192.168.64.2/android_connect/create_product.php";
+    private static String url_create_category = "http://192.168.64.2/android_connect/create_category.php";
 
     private static String TAG_SUCCESS = "success";
 
@@ -79,6 +57,7 @@ public class AddCategory extends AppCompatActivity {
             public void onClick(View v) {
                 //addCategory();
                 new CreateNewCategory().execute();
+                DB.updateCategories();
             }
         });
     }
@@ -113,7 +92,13 @@ public class AddCategory extends AppCompatActivity {
             params.add(new BasicNameValuePair("name", categoryName));
             params.add(new BasicNameValuePair("color", categoryColor));
 
+            Log.d("NEWCAT", params.toString());
+            Log.d("NEWCAT", url_create_category);
             JSONObject json = jsonParser.makeHttpRequest(url_create_category, "POST", params);
+
+            if (json == null){
+                Log.d("NEWCAT", "JSON is null");
+            }
 
             try{
                 int success = json.getInt(TAG_SUCCESS);

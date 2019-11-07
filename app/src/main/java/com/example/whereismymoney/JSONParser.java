@@ -21,8 +21,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-class JSONParser extends org.json.simple.parser.JSONParser {
-
+public class JSONParser {
 
     static InputStream is = null;
     static JSONObject jObj = null;
@@ -90,6 +89,7 @@ class JSONParser extends org.json.simple.parser.JSONParser {
 
         // try parse the string to a JSON object
         try {
+            Log.d("JSONParser", json);
             jObj = new JSONObject(json);
         } catch (JSONException e) {
             Log.e("JSON Parser", "Error parsing data " + e.toString());
