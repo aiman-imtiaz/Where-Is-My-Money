@@ -4,40 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MakeCategoryOrSpending">
+    tools:context=".UpdateSpendingsLimit">
 
-    <Button
-        android:id="@+id/makeCategoryBTN"
+    <TextView
+        android:id="@+id/currentSpendingsLimit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
-        android:text="Make Category"
-        app:layout_constraintBottom_toTopOf="@+id/makeSpendingBTN"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/makeSpendingBTN"
+    <EditText
+        android:id="@+id/editSpendingsLimitAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:text="Make Spending"
+        android:ems="10"
+        android:hint="Enter new spendings limit"
+        android:inputType="numberDecimal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.501" />
+        app:layout_constraintTop_toBottomOf="@+id/currentSpendingsLimit" />
 
-    <Button
-        android:id="@+id/updateSpendingsLimitBTN"
+    <TextView
+        android:id="@+id/TEXT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Update Spendings Limit"
-        app:layout_constraintBottom_toTopOf="@+id/makeCategoryBTN"
+        android:layout_marginBottom="25dp"
+        android:text="Current Spending Limit:"
+        app:layout_constraintBottom_toTopOf="@+id/currentSpendingsLimit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/editSpendingsLimitBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Spendings Limit"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75" />
+        app:layout_constraintTop_toBottomOf="@+id/editSpendingsLimitAmount" />
 </androidx.constraintlayout.widget.ConstraintLayout>

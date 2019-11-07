@@ -124,6 +124,7 @@ public class Database {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public Database(){
+        spendingsLimit = 1000;
         Category defaultCat = new Category(defaultCategoryName, Color.valueOf(Color.GRAY));
         Categories.add(defaultCat);
         categoryMap.put(defaultCategoryName, defaultCat);
@@ -135,11 +136,14 @@ public class Database {
     }
 
     public void updateCategories() {
+        System.out.println("Hello, Im in updatecategories!");
         new GetCategories().execute();
     }
 
     public void updateSpendings() {
+        System.out.println("Hello, Im in updatespendings!");
         new GetSpendings().execute();
+
     }
 
     private void UpdateSpendingCategory(Spending spnd, Category cat){
@@ -158,8 +162,10 @@ public class Database {
 
     public void MakeSpending(float amt, Date dt, Category cat){
         Spending newSpnd = new Spending(amt, dt, cat);
+        System.out.println(newSpnd.date.toString());
         Spendings.add(newSpnd);
         totalSpendings += amt;
+        Log.d("MKSPD", Spendings.toString());
     }
 
     public void MakeSpending(float amt, Date dt, Category cat, String desc){
@@ -350,7 +356,7 @@ public class Database {
                         //Date newdate = new Date(date);
                         Date newDate = Date.from(Instant.now());
                         MakeSpending(Float.parseFloat(amount), newDate, (Category) categoryMap.get(category));
-                        Log.d("DBSPDS", Spendings.toString());
+                        Log.d("DBSPDS", MainActivity.DB.Spendings.toString());
 
                         // adding HashList to ArrayList
                         spendingsList.add(map);

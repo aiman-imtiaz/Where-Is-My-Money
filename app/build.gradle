@@ -52,3 +52,8 @@ dependencies {
 configurations {
     compile.exclude group: "junit", module: "junit"
 }
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:+'
+    implementation 'androidx.constraintlayout:constraintlayout:+'
+}
