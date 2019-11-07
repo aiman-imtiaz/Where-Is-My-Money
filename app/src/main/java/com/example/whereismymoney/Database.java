@@ -40,6 +40,23 @@ import org.json.JSONObject;
 import java.util.Date;
 import java.util.Map;
 
+/**
+ *
+ * Database of the application that tracks personal finances.
+ *
+ * WhereIsMyMoney takes input from users such as monthly spending limit, spendings,
+ * newly created categories, and any edits they make; this class contains all methods
+ * than handle those inputs.
+ *
+ * @see AddCategory
+ * @see AddSpending
+ * @see MakeCategoryOrSpending
+ *
+ * @author Aiman, Casper, Elaine and Leyli
+ * @version 1.0
+ *
+ */
+
 
 public class Database {
 
@@ -113,11 +130,25 @@ public class Database {
     ArrayList<HashMap<String, String>> categoriesList;
     ArrayList<HashMap<String, String>> spendingsList;
 
-    private String defaultCategoryName = "Uncategorized";
+    /**
+     * This is a default category if the user chooses not to create any categories
+    **/
+     private String defaultCategoryName = "Uncategorized";
     float spendingsLimit;
     float totalSpendings;
+    /**
+     * This is a list of spending objects.
+     * Each spending object has a category attached to it.
+     */
     public List<Spending> Spendings = new ArrayList<Spending>();
+    /**
+     * This is a list of category objects.
+     * Each category has a color attached to it.
+     */
     public List<Category> Categories = new ArrayList<Category>();
+    /**
+     * This is a map of strings of category names to respective category objects
+     */
     public Map categoryMap = new Hashtable<String, Category>();
 
 
@@ -135,6 +166,7 @@ public class Database {
         new GetSpendings().execute();
     }
 
+
     public void updateCategories() {
         System.out.println("Hello, Im in updatecategories!");
         new GetCategories().execute();
@@ -146,20 +178,61 @@ public class Database {
 
     }
 
+    /**
+     *
+     * Method updates the spending category.
+     *
+     * Given a new category, and a spending that has already been created,
+     * this method changes the old category to the new category.
+     *
+     * @param spnd The spending object that needs to be altered
+     * @param cat The category object to which the user wants to add the spending
+     */
     private void UpdateSpendingCategory(Spending spnd, Category cat){
         spnd.AssignCategory(cat);
         Spendings.add(spnd);
     }
 
+    /**
+     *
+     * Method updates the spending amount.
+     *
+     * Given a new amount, and an existing spending object, this method changes
+     * the amount spent.
+     *
+     * @param spnd The spending object that needs to be changed
+     * @param amt A number that will be the new amount in the spending object
+     */
     private void UpdateSpendingAmount(Spending spnd, float amt){
         spnd.amount = amt;
         totalSpendings += amt;
     }
 
+    /**
+     *
+     * Method updates the spending description.
+     *
+     * Given a spending object, and a description, this method changes the description
+     * in the spending object.
+     *
+     * @param spnd The spending object that needs to be changed
+     * @param desc A description that will be added to the spending object
+     */
     private void UpdateSpendingDescription(Spending spnd, String desc){
         spnd.description = desc;
     }
 
+    /**
+     *
+     * Method makes new spending object.
+     *
+     * Given a float that represents the amount spent, a date, and a category object,
+     * this method creates a new spending object.
+     *
+     * @param amt This is the amount spent
+     * @param dt This is the date on which the spending was made
+     * @param cat This is the category to which the spending belongs
+     */
     public void MakeSpending(float amt, Date dt, Category cat){
         Spending newSpnd = new Spending(amt, dt, cat);
         System.out.println(newSpnd.date.toString());
@@ -168,12 +241,32 @@ public class Database {
         Log.d("MKSPD", Spendings.toString());
     }
 
+    /**
+     *
+     * Method makes new spending object with a description.
+     *
+     * Given a float that represents the amount spent, a date, a category object,
+     * and a description, this method creates a new spending object.
+     *
+     * @param amt This is the amount spent
+     * @param dt This is the date on which the spending was made
+     * @param cat This is the category to which the spending belongs
+     */
     public void MakeSpending(float amt, Date dt, Category cat, String desc){
         Spending newSpnd = new Spending(amt, dt, cat, desc);
         Spendings.add(newSpnd);
         totalSpendings += amt;
     }
 
+    /**
+     *
+     * Method makes a new category object.
+     *
+     * Given a name and a color, this method creates a new category.
+     *
+     * @param name This is the name of the category
+     * @param col This is the color of the category
+     */
     public void MakeCategory(String name, Color col){
         // If the category name is already in the Categories List, give an error
         Category category = new Category(name, col);
@@ -181,10 +274,28 @@ public class Database {
         categoryMap.put(name, category);
     }
 
+    /**
+     *
+     * Method updates the spending limit.
+     *
+     * Given an amount, this method changes the spending limit.
+     *
+     * @param amt This is the amount that is the spending limit.
+     */
     private void UpdateSpendingsLimit(float amt){
         spendingsLimit = amt;
     }
 
+    /**
+     *
+     * Method returns spendings in a category.
+     *
+     * Given a category object, this method returns the list of spending objects
+     * that are in the category.
+     *
+     * @param cat This is the category object from which we want to see all spendings
+     * @return
+     */
     private List<Spending> ReturnSpendingsInCategory(Category cat){
         List<Spending> returnList = new ArrayList<Spending>();
         for (Spending spd : Spendings){
