@@ -217,9 +217,9 @@ public class AddSpending extends AppCompatActivity {
                     /**
                      * Updating parsed JSON data into ListView
                      * */
-                    String[] names = new String[DB.categoriesList.size()-1];
-                    for (int i = 0; i<DB.categoriesList.size()-1; i++){
-                        names[i] = DB.categoriesList.get(i).get(TAG_NAME);
+                    String[] names = new String[DB.Categories.size()];
+                    for (int i = 0; i<DB.Categories.size(); i++){
+                        names[i] = DB.Categories.get(i).name;
                     }
 
                     Log.d("ADDSPEND", names[0].toString());

@@ -162,6 +162,9 @@ public class Database {
 
         categoriesList = new ArrayList<HashMap<String, String>>();
         spendingsList = new ArrayList<HashMap<String, String>>();
+        /*if (Date.from(Instant.now()).getDay() == 1) {
+            totalSpendings = 0f;
+        }*/
         new GetCategories().execute();
         new GetSpendings().execute();
     }
@@ -169,6 +172,7 @@ public class Database {
 
     public void updateCategories() {
         System.out.println("Hello, Im in updatecategories!");
+        Categories.clear();
         new GetCategories().execute();
     }
 
@@ -414,7 +418,7 @@ public class Database {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
+            categoriesList.clear();
             return null;
         }
 
@@ -477,7 +481,7 @@ public class Database {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
+            spendingsList.clear();
             return null;
         }
 
