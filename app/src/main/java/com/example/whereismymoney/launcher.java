@@ -41,16 +41,6 @@ public class launcher extends AppCompatActivity {
         setContentView(R.layout.activity_launcher);
         DB.updateCategories();
         DB.updateSpendings();
-        Log.d("BUNCAT", String.valueOf(DB.Categories.size()));
-        /*if (DB.Categories.size() == 0){
-            categoryName = DB.defaultCategoryName;
-            categoryColor = String.valueOf(DB.defaultCategoryColor.toArgb());
-            DB.MakeCategory(DB.defaultCategoryName, DB.defaultCategoryColor);
-            new CreateNewCategory().execute();
-        }else {
-            dosomething();
-        }*/
-
         button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +55,6 @@ public class launcher extends AppCompatActivity {
                 }
             }
         });
-        Log.d("AUNCAT", String.valueOf(DB.Categories.size()));
     }
 
 
@@ -94,8 +83,6 @@ public class launcher extends AppCompatActivity {
             params.add(new BasicNameValuePair("name", categoryName));
             params.add(new BasicNameValuePair("color", categoryColor));
 
-            Log.d("NEWCAT", params.toString());
-            Log.d("NEWCAT", url_create_category);
             JSONObject json = jsonParser.makeHttpRequest(url_create_category, "POST", params);
 
             if (json == null){

@@ -68,11 +68,7 @@ public class AddCategory extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_category);/*
-        colorMap = new HashMap<String, Color>();
-        colorMap.put("Red", Color.valueOf(Color.RED));
-        colorMap.put("Blue", Color.valueOf(Color.BLUE));
-        colorMap.put("Yellow", Color.valueOf(Color.YELLOW));*/
+        setContentView(R.layout.activity_add_category);
         chooseCategoryColor = (Spinner) findViewById(R.id.chooseCategoryColor);
         addCategoryNameInput = (EditText) findViewById(R.id.addCategoryNameInput);
         addCategoryBTN = (Button) findViewById(R.id.addCategoryBTN);
@@ -86,14 +82,6 @@ public class AddCategory extends AppCompatActivity {
             }
         });
     }
-    /*public void addCategory(){
-        String categoryName = addCategoryNameInput.getText().toString();
-        //Object categoryColor = colorDictionary.get(chooseCategoryColor);
-        Color categoryColor = Color.valueOf(Color.parseColor(String.valueOf(chooseCategoryColor.getSelectedItem())));
-        DB.MakeCategory(categoryName, categoryColor);
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }*/
 
     class CreateNewCategory extends AsyncTask<String, String, String> {
 
@@ -115,8 +103,6 @@ public class AddCategory extends AppCompatActivity {
             params.add(new BasicNameValuePair("name", categoryName));
             params.add(new BasicNameValuePair("color", categoryColor));
 
-            Log.d("NEWCAT", params.toString());
-            Log.d("NEWCAT", url_create_category);
             JSONObject json = jsonParser.makeHttpRequest(url_create_category, "POST", params);
 
             if (json == null){

@@ -57,7 +57,6 @@ public class AddSpending extends AppCompatActivity {
 
     JSONArray categories = null;
 
-    //ArrayList<HashMap<String, String>> categoriesList;
 
 
 
@@ -65,8 +64,6 @@ public class AddSpending extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_spending);
-
-        //categoriesList = new ArrayList<HashMap<String, String>>();
 
 
         new GetCategories().execute();
@@ -89,18 +86,6 @@ public class AddSpending extends AppCompatActivity {
         });
     }
 
-    /*@RequiresApi(api = Build.VERSION_CODES.O)
-    public void addSpending(){
-        output.setText(spendingAmountInput.getText().toString());
-        float spendingAmount = Float.parseFloat(spendingAmountInput.getText().toString());
-
-        Date newDate = Date.from(Instant.now());
-        DB.MakeSpending(spendingAmount, newDate, (Category) DB.categoryMap.get(String.valueOf(chooseSpendingCategory.getSelectedItem())));
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-    */
-
     class CreateNewSpending extends AsyncTask<String, String, String> {
 
 
@@ -116,7 +101,6 @@ public class AddSpending extends AppCompatActivity {
 
         protected String doInBackground(String... args) {
 
-            Log.d("ADDSPEND", spendingCategory);
 
             List<NameValuePair> params = new ArrayList<>();
             params.add(new BasicNameValuePair("amount", spendingAmount));
@@ -159,56 +143,6 @@ public class AddSpending extends AppCompatActivity {
             return null;
         }
 
-        /*
-        protected String doInBackground(String... args) {
-            // Building Parameters
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
-            // getting JSON string from URL
-            Log.d("ADDSPENDING", "Params ok");
-            JSONObject json = jsonParser.makeHttpRequest(url_all_categories, "GET", params);
-            Log.d("ALLPRODUCTS", "Made HTTP request");
-
-            // Check your log cat for JSON reponse
-
-            try {
-                // Checking for SUCCESS TAG
-                int success = json.getInt(TAG_SUCCESS);
-
-                if (success == 1) {
-                    // products found
-                    // Getting Array of Products
-                    categories = json.getJSONArray(TAG_CATEGORIES);
-
-                    // looping through All Products
-                    for (int i = 0; i < categories.length(); i++) {
-                        JSONObject c = categories.getJSONObject(i);
-
-                        // Storing each json item in variable
-                        String id = c.getString(TAG_CID);
-                        String name = c.getString(TAG_NAME);
-
-                        // creating new HashMap
-                        HashMap<String, String> map = new HashMap<String, String>();
-
-                        // adding each child node to HashMap key => value
-                        map.put(TAG_CID, id);
-                        map.put(TAG_NAME, name);
-
-                        // adding HashList to ArrayList
-                        categoriesList.add(map);
-                        Log.d("DISPLAYCAT", categoriesList.toString());
-                    }
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-
-
-
-            return null;
-        }*/
-
         /**
          * After completing background task Dismiss the progress dialog
          * **/
@@ -225,43 +159,11 @@ public class AddSpending extends AppCompatActivity {
                         names[i] = DB.Categories.get(i).name;
                     }
 
-                    //Log.d("ADDSPEND", names[0].toString());
 
                     ArrayAdapter dataAdapter = new ArrayAdapter(AddSpending.this,
-                            android.R.layout.simple_spinner_dropdown_item, names);/*new ArrayAdapter<Object>(this,
-                            android.R.layout.simple_spinner_dropdown_item, categoriesList.);*/
-                    //dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-
-                    // SIMPLE ADAPTER VERSION
-                    /*SimpleAdapter dataAdapter = new SimpleAdapter(AddSpending.this,
-                            DB.categoriesList, R.layout.support_simple_spinner_dropdown_item, new String[]{DB.getTagName(), DB.getTagCid()},
-                            new int[]{android.R.id.text1});/*new ArrayAdapter<Object>(this,
-                            android.R.layout.simple_spinner_dropdown_item, categoriesList.);
-                    dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    */
-
-
-
-                    /*SimpleAdapter.ViewBinder viewBinder = new SimpleAdapter.ViewBinder() {
-                        @Override
-                        public boolean setViewValue(View view, Object data, String textRepresentation) {
-                            TextView textView = (TextView) view;
-                            textView.setText(textRepresentation);
-                            return true;
-                        }
-                    };
-                    dataAdapter.setViewBinder(viewBinder);*/
+                            android.R.layout.simple_spinner_dropdown_item, names);
                     chooseSpendingCategory.setAdapter(dataAdapter);
 
-                    /*ListAdapter adapter = new SimpleAdapter(
-                            AllProductsActivity.this, productsList,
-                            R.layout.list_item, new String[] { TAG_PID,
-                            TAG_NAME},
-                            new int[] { R.id.pid, R.id.name });
-                    // updating listview
-                    setListAdapter(adapter);
-                }*/
                 }
             });
 

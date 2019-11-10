@@ -30,7 +30,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public static Database DB = launcher.DB;
-    public float[] spendingProportions;
     FloatingActionButton makeCategoryOrSpendingBTN;
     ProgressBar spendingGoalProgress;
     TextView progressToSpendingLimitTXT;
@@ -40,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //spendingProportions = DB.getSpendingProportions();
         spendingGoalProgress = (ProgressBar) findViewById(R.id.spendingGoalProgress);
         progressToSpendingLimitTXT = (TextView) findViewById(R.id.progressToSpendingLimitTXT);
         setupProgressBar();

@@ -1,10 +1,5 @@
 package com.example.whereismymoney;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,34 +55,12 @@ public class Database {
     private ProgressDialog pDialog;
 
     JSONParser jsonParser = new com.example.whereismymoney.JSONParser();
-//    TextView output;
-//    Button addSpendingBTN;
-//    EditText spendingAmountInput;
-//    Spinner chooseSpendingCategory;
 
     private static String url_all_categories = "http://192.168.64.2/android_connect/get_all_categories.php";
     private static String url_all_spendings = "http://192.168.64.2/android_connect/get_all_spendings.php";
 
 
-//    public static String getTagSuccess() {
-//        return TAG_SUCCESS;
-//    }
-//
-//    public static String getTagCategories() {
-//        return TAG_CATEGORIES;
-//    }
-//
-//    public static String getTagCid() {
-//        return TAG_CID;
-//    }
-//
-//    public static String getTagName() {
-//        return TAG_NAME;
-//    }
-//
-//    public static String getTagColor() {
-//        return TAG_COLOR;
-//    }
+
 
     private static final String TAG_SUCCESS = "success";
 
@@ -102,24 +75,6 @@ public class Database {
     private static final String TAG_SPENDINGS = "spendings";
     private static final String TAG_SID = "sid";
     private static final String TAG_AMOUNT = "amount";
-
-    
-//    public static String getTagSpendings() {
-//        return TAG_SPENDINGS;
-//    }
-//
-//    public static String getTagSid() {
-//        return TAG_SID;
-//    }
-//
-//    public static String getTagAmount() {
-//        return TAG_AMOUNT;
-//    }
-//
-//    public static String getTagCategory() {
-//        return TAG_CATEGORY;
-//    }
-
     private static final String TAG_CATEGORY = "category";
 
     JSONArray categories = null;
@@ -155,30 +110,25 @@ public class Database {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public Database(){
         spendingsLimit = 1000;
-        //Category defaultCat = new Category(defaultCategoryName, Color.valueOf(Color.GRAY));
-        //Categories.add(defaultCat);
-        //categoryMap.put(defaultCategoryName, defaultCat);
 
         categoriesList = new ArrayList<HashMap<String, String>>();
         spendingsList = new ArrayList<HashMap<String, String>>();
+        //TODO: This should reset the totalspendings every month, but need to make sure it doesn't
+        // happen multiple times the same day
         /*if (Date.from(Instant.now()).getDay() == 1) {
             totalSpendings = 0f;
         }*/
-//        new GetCategories().execute();
-//        new GetSpendings().execute();
     }
 
 
     public void updateCategories() {
         totalSpendings = 0f;
-        System.out.println("Hello, Im in updatecategories!");
         Categories.clear();
         new GetCategories().execute();
     }
 
     public void updateSpendings() {
         totalSpendings = 0f;
-        System.out.println("Hello, Im in updatespendings!");
         new GetSpendings().execute();
 
     }
@@ -243,7 +193,6 @@ public class Database {
         System.out.println(newSpnd.date.toString());
         this.Spendings.add(newSpnd);
         this.totalSpendings += amt;
-        Log.d("MKSPD", Spendings.toString());
     }
 
     /**
@@ -273,7 +222,7 @@ public class Database {
      * @param col This is the color of the category
      */
     public void MakeCategory(String name, Color col){
-        // If the category name is already in the Categories List, give an error
+        //TODO: If the category name is already in the Categories List, give an error
         Category category = new Category(name, col);
         this.Categories.add(category);
         categoryMap.put(name, category);
@@ -330,30 +279,6 @@ public class Database {
         return retval;
     }
 
-    /**
-     * Method gets spending proportions.
-     *
-     * This method takes the sum of all spendings, and returns a proportion of spending per category.
-     *
-     * @return A list of floats where each float is a proportion of spending within each category in
-     * relation to the overall spending.
-     */
-    public float[] getSpendingProportions(){
-        float[] proportions = new float[Categories.size()];
-        List<Spending> spdList;
-        float spendingAmount = 0f;
-        for (Category cat : Categories){
-            spdList = ReturnSpendingsInCategory(cat);
-            for (Spending spd : spdList){
-                spendingAmount += spd.amount;
-            }
-            spendingAmount /= totalSpendings;
-            proportions[Categories.indexOf(cat)] = spendingAmount;
-            spendingAmount = 0f;
-        }
-
-        return proportions;
-    }
 
     /**
      *
@@ -422,11 +347,7 @@ public class Database {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             Categories.clear();
             // getting JSON string from URL
-            Log.d("ADDSPENDING", "Params ok");
             JSONObject json = jsonParser.makeHttpRequest(url_all_categories, "GET", params);
-            Log.d("ALLPRODUCTS", "Made HTTP request");
-
-            // Check your log cat for JSON reponse
 
             //// MMMMMAAAAAAAAP
             try {
@@ -457,17 +378,14 @@ public class Database {
                         map.put(TAG_COLOR, color);
 
                         MakeCategory(name, Color.valueOf(Integer.parseInt(color)));
-                        Log.d("DBCATS", Categories.toString());
 
                         // adding HashList to ArrayList
                         categoriesList.add(map);
-                        Log.d("DISPLAYCAT", categoriesList.toString());
                     }
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-//             categoriesList.clear();
             return null;
         }
 
@@ -493,7 +411,6 @@ public class Database {
             // getting JSON string from URL
             JSONObject json = jsonParser.makeHttpRequest(url_all_spendings, "GET", params);
 
-            // Check your log cat for JSON reponse
 
             //// MMMMMAAAAAAAAP
             try {
@@ -527,20 +444,16 @@ public class Database {
                         map.put("created_at", date);
 
 
-                        //Date newdate = new Date(date);
                         Date newDate = Date.from(Instant.now());
                         MakeSpending(Float.parseFloat(amount), newDate, (Category) categoryMap.get(category));
-                        Log.d("DBSPDS", launcher.DB.Spendings.toString());
 
                         // adding HashList to ArrayList
                         spendingsList.add(map);
-                        Log.d("DISPLAYSPD", spendingsList.toString());
                     }
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-//            spendingsList.clear();
             return null;
         }
 
