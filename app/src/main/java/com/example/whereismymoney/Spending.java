@@ -2,7 +2,6 @@ package com.example.whereismymoney;
 
 
 import java.util.Date;
-import java.util.List;
 
 
 public class Spending implements Comparable<Category>{

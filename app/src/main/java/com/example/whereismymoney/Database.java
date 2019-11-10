@@ -10,28 +10,12 @@ import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.SimpleAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
-
-import androidx.annotation.ColorInt;
 import androidx.annotation.RequiresApi;
 
 import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import org.apache.http.NameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Date;
 import java.util.Map;
 
@@ -206,11 +190,11 @@ public class Database {
      * @param dt This is the date on which the spending was made
      * @param cat This is the category to which the spending belongs
      */
-//    public void MakeSpending(float amt, Date dt, Category cat, String desc){
-//        Spending newSpnd = new Spending(amt, dt, cat, desc);
-//        Spendings.add(newSpnd);
-//        totalSpendings += amt;
-//    }
+    public void MakeSpending(float amt, Date dt, Category cat, String desc){
+        Spending newSpnd = new Spending(amt, dt, cat, desc);
+        Spendings.add(newSpnd);
+        totalSpendings += amt;
+    }
 
     /**
      *
