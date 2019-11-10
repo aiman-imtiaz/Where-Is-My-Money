@@ -29,7 +29,7 @@ import java.util.List;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class MainActivity extends AppCompatActivity {
 
-    public static Database DB = new Database();
+    public static Database DB = launcher.DB;
     public float[] spendingProportions;
     FloatingActionButton makeCategoryOrSpendingBTN;
     ProgressBar spendingGoalProgress;
@@ -37,10 +37,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        DB.updateCategories();
-        DB.updateSpendings();
+
         spendingProportions = DB.getSpendingProportions();
         spendingGoalProgress = (ProgressBar) findViewById(R.id.spendingGoalProgress);
         progressToSpendingLimitTXT = (TextView) findViewById(R.id.progressToSpendingLimitTXT);
@@ -99,4 +99,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MakeCategoryOrSpending.class);
         startActivity(intent);
     }
+
+
 }

@@ -30,7 +30,7 @@ public class AddCategory extends AppCompatActivity {
     private ProgressDialog pDialog;
 
     JSONParser jsonParser = new com.example.whereismymoney.JSONParser();
-    Database DB = MainActivity.DB;
+    Database DB = launcher.DB;
     Button addCategoryBTN;
     Spinner chooseCategoryColor;
     EditText addCategoryNameInput;

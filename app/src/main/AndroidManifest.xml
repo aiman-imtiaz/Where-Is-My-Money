@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.whereismymoney">
+    <!-- Internet Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -9,11 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UpdateSpendingsLimit"></activity>
+        <activity android:name=".UpdateSpendingsLimit" />
         <activity android:name=".AddCategory" />
         <activity android:name=".AddSpending" />
         <activity android:name=".MakeCategoryOrSpending" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" />
+        <activity android:name=".launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,6 +25,4 @@
         </activity>
     </application>
 
-    <!-- Internet Permissions -->
-    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

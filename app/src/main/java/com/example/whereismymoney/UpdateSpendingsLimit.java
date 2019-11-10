@@ -14,7 +14,7 @@ import android.widget.TextView;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class UpdateSpendingsLimit extends AppCompatActivity {
 
-    Database DB = MainActivity.DB;
+    Database DB = launcher.DB;
     TextView currentSpendingsLimit;
     EditText editSpendingsLimitAmount;
     Button editSpendingsLimitBTN;

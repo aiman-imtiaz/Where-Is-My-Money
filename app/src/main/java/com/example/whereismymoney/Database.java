@@ -63,34 +63,34 @@ public class Database {
     private ProgressDialog pDialog;
 
     JSONParser jsonParser = new com.example.whereismymoney.JSONParser();
-    TextView output;
-    Button addSpendingBTN;
-    EditText spendingAmountInput;
-    Spinner chooseSpendingCategory;
+//    TextView output;
+//    Button addSpendingBTN;
+//    EditText spendingAmountInput;
+//    Spinner chooseSpendingCategory;
 
     private static String url_all_categories = "http://192.168.64.2/android_connect/get_all_categories.php";
     private static String url_all_spendings = "http://192.168.64.2/android_connect/get_all_spendings.php";
 
 
-    public static String getTagSuccess() {
-        return TAG_SUCCESS;
-    }
-
-    public static String getTagCategories() {
-        return TAG_CATEGORIES;
-    }
-
-    public static String getTagCid() {
-        return TAG_CID;
-    }
-
-    public static String getTagName() {
-        return TAG_NAME;
-    }
-
-    public static String getTagColor() {
-        return TAG_COLOR;
-    }
+//    public static String getTagSuccess() {
+//        return TAG_SUCCESS;
+//    }
+//
+//    public static String getTagCategories() {
+//        return TAG_CATEGORIES;
+//    }
+//
+//    public static String getTagCid() {
+//        return TAG_CID;
+//    }
+//
+//    public static String getTagName() {
+//        return TAG_NAME;
+//    }
+//
+//    public static String getTagColor() {
+//        return TAG_COLOR;
+//    }
 
     private static final String TAG_SUCCESS = "success";
 
@@ -106,21 +106,21 @@ public class Database {
     private static final String TAG_SID = "sid";
     private static final String TAG_AMOUNT = "amount";
 
-    public static String getTagSpendings() {
-        return TAG_SPENDINGS;
-    }
-
-    public static String getTagSid() {
-        return TAG_SID;
-    }
-
-    public static String getTagAmount() {
-        return TAG_AMOUNT;
-    }
-
-    public static String getTagCategory() {
-        return TAG_CATEGORY;
-    }
+//    public static String getTagSpendings() {
+//        return TAG_SPENDINGS;
+//    }
+//
+//    public static String getTagSid() {
+//        return TAG_SID;
+//    }
+//
+//    public static String getTagAmount() {
+//        return TAG_AMOUNT;
+//    }
+//
+//    public static String getTagCategory() {
+//        return TAG_CATEGORY;
+//    }
 
     private static final String TAG_CATEGORY = "category";
 
@@ -135,7 +135,7 @@ public class Database {
     **/
      private String defaultCategoryName = "Uncategorized";
     float spendingsLimit;
-    float totalSpendings;
+    float totalSpendings = 0f;
     /**
      * This is a list of spending objects.
      * Each spending object has a category attached to it.
@@ -165,18 +165,20 @@ public class Database {
         /*if (Date.from(Instant.now()).getDay() == 1) {
             totalSpendings = 0f;
         }*/
-        new GetCategories().execute();
-        new GetSpendings().execute();
+//        new GetCategories().execute();
+//        new GetSpendings().execute();
     }
 
 
     public void updateCategories() {
+        totalSpendings = 0f;
         System.out.println("Hello, Im in updatecategories!");
         Categories.clear();
         new GetCategories().execute();
     }
 
     public void updateSpendings() {
+        totalSpendings = 0f;
         System.out.println("Hello, Im in updatespendings!");
         new GetSpendings().execute();
 
@@ -240,8 +242,8 @@ public class Database {
     public void MakeSpending(float amt, Date dt, Category cat){
         Spending newSpnd = new Spending(amt, dt, cat);
         System.out.println(newSpnd.date.toString());
-        Spendings.add(newSpnd);
-        totalSpendings += amt;
+        this.Spendings.add(newSpnd);
+        this.totalSpendings += amt;
         Log.d("MKSPD", Spendings.toString());
     }
 
@@ -256,11 +258,11 @@ public class Database {
      * @param dt This is the date on which the spending was made
      * @param cat This is the category to which the spending belongs
      */
-    public void MakeSpending(float amt, Date dt, Category cat, String desc){
-        Spending newSpnd = new Spending(amt, dt, cat, desc);
-        Spendings.add(newSpnd);
-        totalSpendings += amt;
-    }
+//    public void MakeSpending(float amt, Date dt, Category cat, String desc){
+//        Spending newSpnd = new Spending(amt, dt, cat, desc);
+//        Spendings.add(newSpnd);
+//        totalSpendings += amt;
+//    }
 
     /**
      *
@@ -274,7 +276,7 @@ public class Database {
     public void MakeCategory(String name, Color col){
         // If the category name is already in the Categories List, give an error
         Category category = new Category(name, col);
-        Categories.add(category);
+        this.Categories.add(category);
         categoryMap.put(name, category);
     }
 
@@ -373,6 +375,7 @@ public class Database {
         protected String doInBackground(String... args) {
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
+            Categories.clear();
             // getting JSON string from URL
             Log.d("ADDSPENDING", "Params ok");
             JSONObject json = jsonParser.makeHttpRequest(url_all_categories, "GET", params);
@@ -399,6 +402,7 @@ public class Database {
                         String name = c.getString(TAG_NAME);
                         String color = c.getString(TAG_COLOR);
 
+
                         // creating new HashMap
                         HashMap<String, String> map = new HashMap<String, String>();
 
@@ -418,7 +422,7 @@ public class Database {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            categoriesList.clear();
+//             categoriesList.clear();
             return null;
         }
 
@@ -433,6 +437,7 @@ public class Database {
         protected String doInBackground(String... args) {
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
+            Spendings.clear();
             // getting JSON string from URL
             JSONObject json = jsonParser.makeHttpRequest(url_all_spendings, "GET", params);
 
@@ -458,6 +463,8 @@ public class Database {
                         String category = s.getString(TAG_CATEGORY);
                         String date = s.getString("created_at");
 
+
+
                         // creating new HashMap
                         HashMap<String, String> map = new HashMap<String, String>();
 
@@ -471,7 +478,7 @@ public class Database {
                         //Date newdate = new Date(date);
                         Date newDate = Date.from(Instant.now());
                         MakeSpending(Float.parseFloat(amount), newDate, (Category) categoryMap.get(category));
-                        Log.d("DBSPDS", MainActivity.DB.Spendings.toString());
+                        Log.d("DBSPDS", launcher.DB.Spendings.toString());
 
                         // adding HashList to ArrayList
                         spendingsList.add(map);
@@ -481,7 +488,7 @@ public class Database {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            spendingsList.clear();
+//            spendingsList.clear();
             return null;
         }
 
