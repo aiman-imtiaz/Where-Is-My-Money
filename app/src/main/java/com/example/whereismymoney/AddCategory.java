@@ -49,6 +49,8 @@ public class AddCategory extends AppCompatActivity {
     Button addCategoryBTN;
     Spinner chooseCategoryColor;
     EditText addCategoryNameInput;
+    Boolean nameAlreadyExists = false;
+    Boolean colorAlreadyExists = false;
 
     String categoryName;
     String categoryColor;
@@ -77,8 +79,25 @@ public class AddCategory extends AppCompatActivity {
             public void onClick(View v) {
                 categoryName = addCategoryNameInput.getText().toString();
                 categoryColor = String.valueOf(Color.parseColor(String.valueOf(chooseCategoryColor.getSelectedItem())));
-                new CreateNewCategory().execute();
-                DB.updateCategories();
+                for (Category cat : DB.Categories) {
+                    if (cat.name.equals(categoryName)){
+                        nameAlreadyExists = true;
+                    }
+                    if (String.valueOf(cat.colour.toArgb()).equals(categoryColor)) {
+                        colorAlreadyExists = true;
+                    }
+                }
+
+                if (!nameAlreadyExists && !colorAlreadyExists){
+                    new CreateNewCategory().execute();
+                    DB.updateCategories();
+                } else{
+                    nameAlreadyExists = false;
+                    colorAlreadyExists = false;
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(i);
+                }
+
             }
         });
     }

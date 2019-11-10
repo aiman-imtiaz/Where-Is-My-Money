@@ -31,7 +31,6 @@ public class AddSpending extends AppCompatActivity {
     private ProgressDialog pDialog;
 
     JSONParser jsonParser = new com.example.whereismymoney.JSONParser();
-    TextView output;
     Button addSpendingBTN;
     EditText spendingAmountInput;
     Spinner chooseSpendingCategory;
@@ -61,7 +60,6 @@ public class AddSpending extends AppCompatActivity {
 
         new GetCategories().execute();
 
-        output = (TextView) findViewById(R.id.output);
         spendingAmountInput = (EditText) findViewById(R.id.spendingAmountInput);
         chooseSpendingCategory = (Spinner) findViewById(R.id.chooseSpendingCategory);
         ArrayAdapter<Object> dataAdapter = new ArrayAdapter<>(this,

@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         chart.setData(data);
         chart.animateY(1000);
         //TODO: Figure out if we want percentage values or not
-        //chart.setUsePercentValues(true);
+        chart.setUsePercentValues(true);
         chart.setHoleRadius(0f);
         chart.setTransparentCircleRadius(0f);
         chart.getDescription().setEnabled(false);
