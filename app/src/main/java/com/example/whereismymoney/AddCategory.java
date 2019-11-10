@@ -61,12 +61,7 @@ public class AddCategory extends AppCompatActivity {
 
     private static String TAG_SUCCESS = "success";
 
-    /**
-     *
-     *
-     *
-     * @param savedInstanceState
-     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +70,17 @@ public class AddCategory extends AppCompatActivity {
         addCategoryNameInput = (EditText) findViewById(R.id.addCategoryNameInput);
         addCategoryBTN = (Button) findViewById(R.id.addCategoryBTN);
         addCategoryBTN.setOnClickListener(new View.OnClickListener() {
+            /**
+             *
+             * Method takes user input to create a new category object.
+             *
+             * Given a view, this method allows the user to select the color and input the name of
+             * the category and create that category. If the color has been used, the user will be
+             * redirected to the main screen. If the category already exists, the user will be
+             * redirected to the main screen.
+             *
+             * @param v This is the view that is reflected on the current screen
+             */
             @Override
             public void onClick(View v) {
                 categoryName = addCategoryNameInput.getText().toString();
@@ -102,6 +108,12 @@ public class AddCategory extends AppCompatActivity {
         });
     }
 
+    /**
+     * CreateNewCategory class creates a category on the database.
+     *
+     * This class allows us to retain data on category objects even after the app is closed.
+     *
+     */
     class CreateNewCategory extends AsyncTask<String, String, String> {
 
 
@@ -115,6 +127,13 @@ public class AddCategory extends AppCompatActivity {
             pDialog.show();
         }
 
+        /**
+         *
+         * Method creates a new row entry in the category table in the database.
+         *
+         * @return In the database, this method returns a new entry in the table
+         * @throws JSONException
+         */
         protected String doInBackground(String... args) {
 
 

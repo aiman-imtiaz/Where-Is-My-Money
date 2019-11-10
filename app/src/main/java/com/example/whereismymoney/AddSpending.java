@@ -25,6 +25,20 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * AddSpending calls methods from Database to add a spending object.
+ *
+ * AddSpending takes arguments from users by reading the information from user input, supplies the
+ * arguments to methods from the Database class and creates a new spending on the online database.
+ *
+ * @see JSONParser
+ * @see Database
+ *
+ * @author Aiman, Casper, Elaine and Leyli
+ * @version 1.0
+ *
+ */
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class AddSpending extends AppCompatActivity {
 
@@ -67,6 +81,17 @@ public class AddSpending extends AppCompatActivity {
         chooseSpendingCategory.setAdapter(dataAdapter);
         addSpendingBTN = (Button) findViewById(R.id.addSpendingBTN);
         addSpendingBTN.setOnClickListener(new View.OnClickListener() {
+            /**
+             *
+             * Method takes user input to create a new category object.
+             *
+             * Given a view, this method allows the user to select the color and input the name of
+             * the category and create that category. If the color has been used, the user will be
+             * redirected to the main screen. If the category already exists, the user will be
+             * redirected to the main screen.
+             *
+             * @param v This is the view that is reflected on the current screen
+             */
             @Override
             public void onClick(View v) {
                 spendingAmount = spendingAmountInput.getText().toString();
@@ -77,6 +102,12 @@ public class AddSpending extends AppCompatActivity {
         });
     }
 
+    /**
+     * CreateNewCategory class creates a category on the database.
+     *
+     * This class allows us to retain data on category objects even after the app is closed.
+     *
+     */
     class CreateNewSpending extends AsyncTask<String, String, String> {
 
 
@@ -127,6 +158,13 @@ public class AddSpending extends AppCompatActivity {
         }
     }
 
+    /**
+     *
+     * Method creates a new row entry in the spendings table in the database.
+     *
+     * @return In the database, this method returns a new entry in the table
+     * @throws JSONException
+     */
     class GetCategories extends AsyncTask<String, String, String> {
 
 
