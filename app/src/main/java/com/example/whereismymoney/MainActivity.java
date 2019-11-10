@@ -56,10 +56,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void onResume(Bundle savedInstanceState){
-        super.onResume();
-    }
-
 
     private void setupProgressBar() {
         float spendingsLimit = DB.spendingsLimit;
