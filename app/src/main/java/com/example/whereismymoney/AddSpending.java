@@ -225,7 +225,7 @@ public class AddSpending extends AppCompatActivity {
                         names[i] = DB.Categories.get(i).name;
                     }
 
-                    Log.d("ADDSPEND", names[0].toString());
+                    //Log.d("ADDSPEND", names[0].toString());
 
                     ArrayAdapter dataAdapter = new ArrayAdapter(AddSpending.this,
                             android.R.layout.simple_spinner_dropdown_item, names);/*new ArrayAdapter<Object>(this,
