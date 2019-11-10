@@ -48,10 +48,6 @@ import java.util.Map;
  * newly created categories, and any edits they make; this class contains all methods
  * than handle those inputs.
  *
- * @see AddCategory
- * @see AddSpending
- * @see MakeCategoryOrSpending
- *
  * @author Aiman, Casper, Elaine and Leyli
  * @version 1.0
  *
@@ -106,6 +102,7 @@ public class Database {
     private static final String TAG_SID = "sid";
     private static final String TAG_AMOUNT = "amount";
 
+    
 //    public static String getTagSpendings() {
 //        return TAG_SPENDINGS;
 //    }
@@ -133,7 +130,7 @@ public class Database {
     /**
      * This is a default category if the user chooses not to create any categories
     **/
-     private String defaultCategoryName = "Uncategorized";
+    private String defaultCategoryName = "Uncategorized";
     float spendingsLimit;
     float totalSpendings = 0f;
     /**
@@ -300,7 +297,7 @@ public class Database {
      * that are in the category.
      *
      * @param cat This is the category object from which we want to see all spendings
-     * @return
+     * @return A list of spendings in a given category
      */
     private List<Spending> ReturnSpendingsInCategory(Category cat){
         List<Spending> returnList = new ArrayList<Spending>();
@@ -312,6 +309,15 @@ public class Database {
         return returnList;
     }
 
+    /**
+     *
+     * Method returns the sum of spendings.
+     *
+     * Given a category object, this method returns the sum of all spendings within the category.
+     *
+     * @param cat This is a category object from which we need the sum of spendings
+     * @return A float which is the sum of all spendings in a category
+     */
     public float SumOfSpendingsInCategory(Category cat){
         float retval = 0;
         for(Spending spd : Spendings){
@@ -322,6 +328,14 @@ public class Database {
         return retval;
     }
 
+    /**
+     * Method gets spending proportions.
+     *
+     * This method takes the sum of all spendings, and returns a proportion of spending per category.
+     *
+     * @return A list of floats where each float is a proportion of spending within each category in
+     * relation to the overall spending.
+     */
     public float[] getSpendingProportions(){
         float[] proportions = new float[Categories.size()];
         List<Spending> spdList;
@@ -339,6 +353,15 @@ public class Database {
         return proportions;
     }
 
+    /**
+     *
+     * Method gets category colors.
+     *
+     * This method gets the colors that a user assigned to each category, and turns them into
+     * respective color integers.
+     *
+     * @return A list of color integers
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public int[] getCategoryColors(){
         int[] retArr = new int[Categories.size()];
@@ -349,11 +372,25 @@ public class Database {
         return retArr;
     }
 
+    /**
+     * Method deletes a spending object.
+     *
+     * Given a spending object, this method deletes the spending object.
+     *
+     * @param spnd This is the spending object that needs to be deleted
+     */
     void deleteSpending(Spending spnd){
         totalSpendings -= spnd.amount;
         Spendings.remove(spnd);
     }
 
+    /**
+     * Method deletes a category object.
+     *
+     * Given a category object, this method deletes the category object.
+     *
+     * @param cat This is the category object that needs to be deleted
+     */
     void deleteCategory(Category cat){
         if((cat.name.compareTo(defaultCategoryName)!=0)){
             for (Spending spnd : Spendings){
@@ -365,6 +402,12 @@ public class Database {
         }
     }
 
+    /**
+     *
+     * GetCategories class sends query to the online database and retrieves the necessary information.
+     *
+     * @throws JSONException
+     */
     class GetCategories extends AsyncTask<String, String, String> {
 
 
@@ -428,6 +471,13 @@ public class Database {
 
     }
 
+
+    /**
+     *
+     * GetSpendings class sends query to the online database and retrieves the necessary information.
+     *
+     * @throws JSONException
+     */
     class GetSpendings extends AsyncTask<String, String, String> {
 
         /**

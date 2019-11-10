@@ -24,6 +24,21 @@ import com.example.whereismymoney.JSONParser;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ *
+ * AddCategory calls methods from Database to add a category object.
+ *
+ * AddCategory takes arguments from users by reading the information from user input, supplies the
+ * arguments to methods from the Database class and creates a new category on the online database.
+ *
+ * @see JSONParser
+ * @see Database
+ *
+ * @author Aiman, Casper, Elaine and Leyli
+ * @version 1.0
+ *
+ */
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class AddCategory extends AppCompatActivity {
 
@@ -44,6 +59,12 @@ public class AddCategory extends AppCompatActivity {
 
     private static String TAG_SUCCESS = "success";
 
+    /**
+     *
+     *
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
