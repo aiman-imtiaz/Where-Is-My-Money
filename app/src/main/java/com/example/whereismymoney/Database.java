@@ -54,6 +54,7 @@ import java.util.Map;
  */
 
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class Database {
 
     private ProgressDialog pDialog;
@@ -130,7 +131,8 @@ public class Database {
     /**
      * This is a default category if the user chooses not to create any categories
     **/
-    private String defaultCategoryName = "Uncategorized";
+    public String defaultCategoryName = "Uncategorized";
+    public Color defaultCategoryColor = Color.valueOf(Color.GRAY);
     float spendingsLimit;
     float totalSpendings = 0f;
     /**
@@ -153,9 +155,9 @@ public class Database {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public Database(){
         spendingsLimit = 1000;
-        Category defaultCat = new Category(defaultCategoryName, Color.valueOf(Color.GRAY));
-        Categories.add(defaultCat);
-        categoryMap.put(defaultCategoryName, defaultCat);
+        //Category defaultCat = new Category(defaultCategoryName, Color.valueOf(Color.GRAY));
+        //Categories.add(defaultCat);
+        //categoryMap.put(defaultCategoryName, defaultCat);
 
         categoriesList = new ArrayList<HashMap<String, String>>();
         spendingsList = new ArrayList<HashMap<String, String>>();
