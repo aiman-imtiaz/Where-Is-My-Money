@@ -35,6 +35,9 @@ public class AddCategory extends AppCompatActivity {
     Spinner chooseCategoryColor;
     EditText addCategoryNameInput;
 
+    String categoryName;
+    String categoryColor;
+
 
     //TODO: Make a new url for this, currently a placeholder
     private static String url_create_category = "http://192.168.64.2/android_connect/create_category.php";
@@ -55,7 +58,8 @@ public class AddCategory extends AppCompatActivity {
         addCategoryBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //addCategory();
+                categoryName = addCategoryNameInput.getText().toString();
+                categoryColor = String.valueOf(Color.parseColor(String.valueOf(chooseCategoryColor.getSelectedItem())));
                 new CreateNewCategory().execute();
                 DB.updateCategories();
             }
@@ -84,8 +88,6 @@ public class AddCategory extends AppCompatActivity {
         }
 
         protected String doInBackground(String... args) {
-            String categoryName = addCategoryNameInput.getText().toString();
-            String categoryColor = String.valueOf(Color.parseColor(String.valueOf(chooseCategoryColor.getSelectedItem())));
 
 
             List<NameValuePair> params = new ArrayList<>();

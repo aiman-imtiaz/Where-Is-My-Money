@@ -52,6 +52,8 @@ public class AddSpending extends AppCompatActivity {
     private static final String TAG_CATEGORIES = "categories";
     private static final String TAG_CID = "cid";
     private static final String TAG_NAME = "name";
+    String spendingAmount;
+    String spendingCategory;
 
     JSONArray categories = null;
 
@@ -79,6 +81,8 @@ public class AddSpending extends AppCompatActivity {
         addSpendingBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                spendingAmount = spendingAmountInput.getText().toString();
+                spendingCategory = String.valueOf(chooseSpendingCategory.getSelectedItem());
                 new CreateNewSpending().execute();
                 DB.updateSpendings();
             }
@@ -111,8 +115,7 @@ public class AddSpending extends AppCompatActivity {
         }
 
         protected String doInBackground(String... args) {
-            String spendingAmount = spendingAmountInput.getText().toString();
-            String spendingCategory = String.valueOf(chooseSpendingCategory.getSelectedItem());
+
             Log.d("ADDSPEND", spendingCategory);
 
             List<NameValuePair> params = new ArrayList<>();
