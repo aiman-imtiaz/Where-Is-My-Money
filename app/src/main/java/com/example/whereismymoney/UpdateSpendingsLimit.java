@@ -11,6 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+/**
+ *
+ * UpdateSpendingLimit class contains frontend methods to take user input on spending limit.
+ *
+ * @author Aiman, Casper, Elaine and Leyli
+ * @version 1.0
+ *
+ */
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class UpdateSpendingsLimit extends AppCompatActivity {
 
@@ -19,6 +27,10 @@ public class UpdateSpendingsLimit extends AppCompatActivity {
     EditText editSpendingsLimitAmount;
     Button editSpendingsLimitBTN;
 
+    /**
+     * Method takes user input for spending limit and supplies it to the method that edits the
+     * spending limit.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +47,9 @@ public class UpdateSpendingsLimit extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method edits the spending limit.
+     */
     public void editSpendingsLimit(){
         DB.spendingsLimit = Float.parseFloat(editSpendingsLimitAmount.getText().toString());
         Intent intent = new Intent(this, MainActivity.class);
