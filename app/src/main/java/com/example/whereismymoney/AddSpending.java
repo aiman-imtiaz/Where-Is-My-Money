@@ -124,8 +124,16 @@ public class AddSpending extends AppCompatActivity {
 
         protected void onPostExecute(String file_url){
             pDialog.dismiss();
+
+
+
         }
     }
+
+
+
+
+
 
     class GetCategories extends AsyncTask<String, String, String> {
 
@@ -159,8 +167,6 @@ public class AddSpending extends AppCompatActivity {
             });
 
         }
-
-
 
 
     }
