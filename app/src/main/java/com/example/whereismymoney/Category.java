@@ -33,7 +33,7 @@ public class Category{
      *
      * @return This is the name of a category object
      */
-    private String getName(){
+    public String getName(){
         return this.name;
     }
 }

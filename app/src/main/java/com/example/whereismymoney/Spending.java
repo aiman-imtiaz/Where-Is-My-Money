@@ -15,7 +15,7 @@ import java.util.Date;
 public class Spending implements Comparable<Category>{
     float amount;
     Date date;
-    Category category;
+    public Category category;
     String description;
 
     /**
@@ -28,7 +28,7 @@ public class Spending implements Comparable<Category>{
     Spending(float amt, Date dt, Category cat){
         amount = amt;
         date = dt;
-        AssignCategory(cat);
+        category = cat;
     }
 
     /**
@@ -42,7 +42,7 @@ public class Spending implements Comparable<Category>{
     Spending(float amt, Date dt, Category cat, String desc){
         amount = amt;
         date = dt;
-        AssignCategory(cat);
+        category = cat;
         description = desc;
     }
 
@@ -50,7 +50,7 @@ public class Spending implements Comparable<Category>{
      * Method gets the amount of the spending object.
      * @return This is the amount spent
      */
-    private float getAmount(){
+    public float getAmount(){
         return this.amount;
     }
 
@@ -58,29 +58,14 @@ public class Spending implements Comparable<Category>{
      * Method gets the date of the spending object.
      * @return This is the date of the spending
      */
-    private Date getDate(){
+    public Date getDate(){
         return this.date;
     }
 
     /**
-     * Method gets the category object that the spending belongs to.
-     * @return This is the category object to which the spending belongs
-     */
-    private Category getCategory(){
-        return this.category;
-    }
-
-    /**
-     * Method assigns a category object to a spending.
-     */
-    public void AssignCategory(Category cat){
-        this.category=cat;
-    }
-
-    /**
-     * Method compares two categories.
+     * Method compares two categories names, the one of the Spending's Category and the one of the parameter.
      * @param o This is the category object
-     * @return boolean on whether two categories are the same
+     * @return 0 if the names are the same, non-0 if the names are different
      */
     @Override
     public int compareTo(Category o) {

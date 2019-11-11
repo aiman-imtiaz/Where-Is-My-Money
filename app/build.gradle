@@ -50,7 +50,8 @@ dependencies {
 }
 
 configurations {
-    compile.exclude group: "junit", module: "junit"
+    //compile.exclude group: "junit", module: "junit"
+    all*.exclude group: 'org.hamcrest', module: 'hamcrest-core'
 }
 
 dependencies {
