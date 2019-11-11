@@ -1,26 +1,13 @@
-matrix:
-  include:
-    - language: node_js
-      node_js:
-        - "10"
-      install:
-        - cd server/
-        - npm install
-      services:
-        - mongodb
-      script:
-        - travis_retry npm run lta
-        - npm run test
 
-    - language: android
-      dist: trusty
-      jdk: oraclejdk8
-      android:
-        components:
+language: android
+dist: trusty
+jdk: oraclejdk8
+android:
+ components:
           - tools
           - android-29
           - build-tools-29.0.2
-      before_script:
-        - cd app/
       script:
         - ./gradlew test
+       
+
