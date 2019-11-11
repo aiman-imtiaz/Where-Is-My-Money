@@ -1,21 +1,26 @@
-language: android
-dist: trusty
-jdk: oraclejdk8
-android:
-  components:
-    - build-tools-29.0.2
-    - android-29
-    - extra
-licenses:
-    - 'android-sdk-preview-license-52d11cd2'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
-before_install:
-  - wget http://services.gradle.org/distributions/gradle-5.4.1-bin.zip
-  - unzip -qq gradle-5.4.1-bin.zip
-  - export GRADLE_HOME=$PWD/gradle-5.4.1
-  - export PATH=$GRADLE_HOME/bin:$PATH
-  - gradle -v
+matrix:
+  include:
+    - language: node_js
+      node_js:
+        - "10"
+      install:
+        - cd server/
+        - npm install
+      services:
+        - mongodb
+      script:
+        - travis_retry npm run lta
+        - npm run test
 
-script:
-  - ./gradlew build --scan -s
+    - language: android
+      dist: trusty
+      jdk: oraclejdk8
+      android:
+        components:
+          - tools
+          - android-29
+          - build-tools-29.0.2
+      before_script:
+        - cd app/
+      script:
+        - ./gradlew test
