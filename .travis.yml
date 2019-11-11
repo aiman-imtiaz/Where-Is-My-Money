@@ -1,5 +1,6 @@
 language: android
 dist: trusty
+jdk: oraclejdk8
 android:
   components:
     - build-tools-29.0.2
@@ -9,3 +10,5 @@ licenses:
     - 'android-sdk-preview-license-52d11cd2'
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
+script:
+  - ./gradlew build --scan -s
