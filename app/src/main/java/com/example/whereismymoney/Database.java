@@ -10,6 +10,9 @@ import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.widget.ListAdapter;
+import android.widget.SimpleAdapter;
+
 import androidx.annotation.RequiresApi;
 
 import org.apache.http.NameValuePair;
@@ -65,7 +68,7 @@ public class Database {
     JSONArray spendings = null;
 
     ArrayList<HashMap<String, String>> categoriesList;
-    ArrayList<HashMap<String, String>> spendingsList;
+    public ArrayList<HashMap<String, String>> spendingsList;
 
     /**
      * This is a default category if the user chooses not to create any categories
@@ -417,7 +420,6 @@ public class Database {
                         String date = s.getString("created_at");
 
 
-
                         // creating new HashMap
                         HashMap<String, String> map = new HashMap<String, String>();
 
@@ -433,6 +435,7 @@ public class Database {
 
                         // adding HashList to ArrayList
                         spendingsList.add(map);
+
                     }
                 }
             } catch (JSONException e) {
@@ -440,6 +443,8 @@ public class Database {
             }
             return null;
         }
+
+
 
     }
 

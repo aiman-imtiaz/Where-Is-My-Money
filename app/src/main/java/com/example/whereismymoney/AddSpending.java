@@ -155,6 +155,9 @@ public class AddSpending extends AppCompatActivity {
 
         protected void onPostExecute(String file_url){
             pDialog.dismiss();
+
+
+
         }
     }
 
@@ -197,8 +200,6 @@ public class AddSpending extends AppCompatActivity {
             });
 
         }
-
-
 
 
     }
