@@ -27,5 +27,6 @@ public class CategoryTests {
         String resName = ins.getName();
         String realName = categoryName;
         assertEquals(resName, realName);
+//        assertEquals(true, true);
     }
 }
