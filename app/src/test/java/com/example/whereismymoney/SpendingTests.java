@@ -12,6 +12,9 @@ import java.util.Date;
 import static org.junit.Assert.*;
 
 
+import static org.hamcrest.CoreMatchers.*;
+
+
 public class SpendingTests {
 
 
@@ -55,6 +58,6 @@ public class SpendingTests {
     @Test
     public void testCompareToFalse() {
         int res = ins.compareTo(wrongCategory);
-        assertNotEquals(res, 0);
+        assertThat(res, not(equalTo(0)));
     }
 }
